@@ -3,12 +3,15 @@ import { createContext, useEffect, useState } from 'react'
 import jwt from 'jsonwebtoken';
 import { usePathname, useRouter } from 'next/navigation';
 import { getUserPurchases } from '../services/endPoints';
+
+
 export const authContext = createContext({
      user: null,
      purchases: [],
      handleRemoveTokenAndUser: () => { },
      handleSetTokenAndUser: () => { },
-     handleGetUserPurchases: () => { },
+     handleSetUserWithPurchases: () => { },
+     handleSetPurchases:()=>{},
      status: ""
 
 })
@@ -34,37 +37,39 @@ const AuthProvider = ({ children }) => {
 
 
 
-     const handleGetUserPurchases = async () => {
-          if (user) {
-               const userPerchases = await getUserPurchases(user.userId)
-               setPurchases(userPerchases)
-          } else {
-               setPurchases([])
-          }
+     const handleGetUserPurchases = async (userId) => {
+          const userPerchases = await getUserPurchases(userId)
+          setPurchases(userPerchases)
+
      }
 
 
-    
+
+     const handleSetPurchases = (products) => {
+          setPurchases(products)
+     }
 
 
      useEffect(() => {
+          handleSetUserWithPurchases()
+     }, [])
+
+
+
+     const handleSetUserWithPurchases = () => {
           const token = localStorage.getItem("authToken")
           if (token) {
                const decodedToken = jwt.decode(token, { complete: true })
                const user = { firstName: decodedToken?.payload.firstName, lastName: decodedToken?.payload.lastName, userId: decodedToken?.payload.userId }
                setUser(user)
                setStatus("authenticated")
-               handleGetUserPurchases()
+               handleGetUserPurchases(user.userId)
           } else {
                setUser()
                setStatus("unauthenticated")
-               handleGetUserPurchases()
+               setPurchases([])
           }
-     }, [])
-
-
-
-
+     }
 
 
 
@@ -73,7 +78,7 @@ const AuthProvider = ({ children }) => {
           setUser()
           setStatus("unauthenticated")
           replace("/")
-          handleGetUserPurchases()
+          setPurchases([])
      }
 
 
@@ -83,11 +88,11 @@ const AuthProvider = ({ children }) => {
           const user = { firstName: decodedToken?.payload.firstName, lastName: decodedToken?.payload.lastName, userId: decodedToken?.payload.userId }
           setUser(user)
           setStatus("authenticated")
-          handleGetUserPurchases()
+          handleGetUserPurchases(user.userId)
 
      }
      return (
-          <authContext.Provider value={{ user, status, purchases, handleSetTokenAndUser, handleGetUserPurchases, handleRemoveTokenAndUser }}>{children}</authContext.Provider>
+          <authContext.Provider value={{ user, status, purchases,handleSetPurchases, handleSetUserWithPurchases, handleSetTokenAndUser, handleGetUserPurchases, handleRemoveTokenAndUser }}>{children}</authContext.Provider>
      )
 }
 

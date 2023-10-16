@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ResultPay = () => {
-  const { handleGetUserPurchases} = useContext(authContext);
+  const {handleSetPurchases}=useContext(authContext)
   const searchParams = useSearchParams();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -34,25 +34,21 @@ const ResultPay = () => {
         case 200:
           setLoading(false);
           setStatus("OK");
-          toast.success(data.message);
-          setData(data.data);
-          handleGetUserPurchases()
-
+          toast.success(data?.message);
+          setData(data?.data);
+          handleSetPurchases(data?.purchases)
           break;
         case 201:
           setLoading(false);
           setStatus("BOK");
-          toast.info(data.message);
-          setData(data.data);
-          handleGetUserPurchases()
+          toast.info(data?.message);
+          setData(data?.data);
           break;
-
         default:
           setLoading(false);
           setStatus("NOTFOUND");
-          toast.error(data.message);
+          toast.error(data?.message);
           setData(null);
-          handleGetUserPurchases()
           break;
       }
     } else {
