@@ -1,8 +1,8 @@
 import { toast } from "react-toastify"
 
 export const baseUrl = "http://localhost:5003"
-export const onLineUrl = "https://www.server.govahito.ir"
-// const onLineUrl = "http://localhost:5003"
+// export const onLineUrl = "https://www.server.govahito.ir"
+const onLineUrl = "http://localhost:5003"
 const headers = { 'Content-Type': 'application/json' }
 
 export const handleCheckUser = async (value) => {
@@ -267,7 +267,7 @@ export const checkPay = async (payId) => {
 export const getUserPurchases = async (userId) => {
      try {
 
-          const response = await fetch(`${onLineUrl}/client/purchases/${userId}`, { next: { revalidate: 10 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
+          const response = await fetch(`${onLineUrl}/client/purchases/${userId}`, { next: { revalidate:1 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
           const result = await response.json()
           return result
      } catch (err) {
