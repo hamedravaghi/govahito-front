@@ -197,6 +197,9 @@ export const getSingleArticle = async (slug) => {
      return result
 }
 
+
+
+//* cards and products
 export const getCart = async (userId) => {
      try {
           const response = await fetch(`${onLineUrl}/cart/${userId}`, { next: { revalidate: 10 }, method: "GET", headers })
@@ -241,7 +244,7 @@ export const removeProductFromCart = async (userId, body) => {
 
 export const pay = async (userId, payValue) => {
      try {
-          const response = await fetch(`${baseUrl}/pay/${userId}`, { body: JSON.stringify(payValue), mode: "cors", method: "POST", headers })
+          const response = await fetch(`${onLineUrl}/pay/${userId}`, { body: JSON.stringify(payValue), mode: "cors", method: "POST", headers })
           const result = await response.json()
           console.log("this is result in pay", result)
           if (response.status !== 200 || response.status !== 201) {
@@ -256,7 +259,7 @@ export const pay = async (userId, payValue) => {
 
 
 export const checkPay = async (payId) => {
-     return await fetch(`${baseUrl}/pay/check-pay/${payId}`, { method: "POST", headers: { 'Content-Type': 'application/json' } })
+     return await fetch(`${onLineUrl}/pay/check-pay/${payId}`, { method: "POST", headers: { 'Content-Type': 'application/json' } })
 
 }
 
@@ -264,7 +267,7 @@ export const checkPay = async (payId) => {
 export const getUserPurchases = async (userId) => {
      try {
 
-          const response = await fetch(`${baseUrl}/client/purchases/${userId}`, { next: { revalidate: 10 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
+          const response = await fetch(`${onLineUrl}/client/purchases/${userId}`, { next: { revalidate: 10 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
           const result = await response.json()
           return result
      } catch (err) {
