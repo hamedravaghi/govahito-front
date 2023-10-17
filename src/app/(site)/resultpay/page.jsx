@@ -3,6 +3,7 @@ import Loader from "@/src/components/Loader";
 import ProductCard from "@/src/components/cards/ProductCard";
 import CustomPadding from "@/src/components/common/CustomPadding";
 import { authContext } from "@/src/provider/AuthProvider";
+import { CartContext } from "@/src/provider/CartProvider";
 import { checkPay } from "@/src/services/endPoints";
 
 import { useSearchParams } from "next/navigation";
@@ -11,43 +12,51 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ResultPay = () => {
-  const {handleSetPurchases}=useContext(authContext)
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { user, handleGetUserPurchases } = useContext(authContext);
+  const { handleGetOpenCart } = useContext(CartContext);
+
+  //* cart payment actions state
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(null);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    handleResponse();
-  }, []);
+    if (user && !status) {
+      handleResponse(user);
+    }
+    if (user && user.userId && status === "OK") {
+      handleGetUserPurchases(user.userId);
+      handleGetOpenCart(user.userId);
+    }
+  }, [user, status]);
 
-  const handleResponse = async () => {
+  const handleResponse = async (user) => {
+    handleGetOpenCart(user.userId);
     const Authority = searchParams.get("Authority");
     const Status = searchParams.get("Status");
+    const result = await checkPay(Authority);
+    const response = await result.json();
 
     if (Status === "OK") {
-      const result = await checkPay(Authority);
-      const data = await result.json();
-
       switch (result.status) {
         case 200:
           setLoading(false);
           setStatus("OK");
-          toast.success(data?.message);
-          setData(data?.data);
-          handleSetPurchases(data?.purchases)
+          toast.success(response.message);
+          setData(response.data);
           break;
         case 201:
           setLoading(false);
           setStatus("BOK");
-          toast.info(data?.message);
-          setData(data?.data);
+          toast.info(response.message);
+          setData(response.data);
           break;
         default:
           setLoading(false);
           setStatus("NOTFOUND");
-          toast.error(data?.message);
+          toast.error(response?.message);
           setData(null);
           break;
       }

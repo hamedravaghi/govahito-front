@@ -11,7 +11,7 @@ export const authContext = createContext({
      handleRemoveTokenAndUser: () => { },
      handleSetTokenAndUser: () => { },
      handleSetUserWithPurchases: () => { },
-     handleSetPurchases:()=>{},
+     handleSetPurchases: () => { },
      status: ""
 
 })
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
                const user = { firstName: decodedToken?.payload.firstName, lastName: decodedToken?.payload.lastName, userId: decodedToken?.payload.userId }
                setUser(user)
                setStatus("authenticated")
-               handleGetUserPurchases(user.userId)
+
           } else {
                setUser()
                setStatus("unauthenticated")
@@ -71,6 +71,15 @@ const AuthProvider = ({ children }) => {
           }
      }
 
+
+     useEffect(() => {
+          if (user) {
+
+               handleGetUserPurchases(user.userId)
+          } else {
+               setPurchases([])
+          }
+     }, [user])
 
 
      const handleRemoveTokenAndUser = () => {
@@ -92,7 +101,7 @@ const AuthProvider = ({ children }) => {
 
      }
      return (
-          <authContext.Provider value={{ user, status, purchases,handleSetPurchases, handleSetUserWithPurchases, handleSetTokenAndUser, handleGetUserPurchases, handleRemoveTokenAndUser }}>{children}</authContext.Provider>
+          <authContext.Provider value={{ user, status, purchases, handleSetPurchases, handleSetUserWithPurchases, handleSetTokenAndUser, handleGetUserPurchases, handleRemoveTokenAndUser }}>{children}</authContext.Provider>
      )
 }
 

@@ -14,6 +14,7 @@ export const CartContext = createContext({
      handleRemoveProduct: () => { },
      handleAddProduct: () => { },
      handleGetProduct: () => { },
+     handleGetOpenCart: () => { },
      handlePay: () => { }
 })
 
@@ -29,7 +30,7 @@ const CartProvider = ({ children }) => {
 
      //* get open carts for first time
      useEffect(() => {
-          if (user) {
+          if (user && !openCart) {
                handleGetOpenCart(user?.userId)
           }
      }, [user])
@@ -67,11 +68,43 @@ const CartProvider = ({ children }) => {
      const handleAddProduct = async (userId, product) => {
           if (userId) {
                setLoading(true)
-               await createOrAddProductToCart(userId, product).then(res => toast.info(res))
-               await handleGetOpenCart(userId).then(res => {
-                    setLoading(false)
-                    router.push("/checkout")
+               await createOrAddProductToCart(userId, product).then(async res => {
+                    const response = await res.json()
+
+                    switch (res.status) {
+                         case 200:
+                              toast.success(response)
+                              await handleGetOpenCart(userId).then(() => {
+                                   setLoading(false)
+                                   router.push("/checkout")
+                              })
+                              break;
+                         case 201:
+                              toast.success(response)
+                              await handleGetOpenCart(userId).then(() => {
+                                   setLoading(false)
+                                   router.push("/checkout")
+                              })
+                              break;
+                         case 202:
+                              toast.warning(response)
+                              break;
+                         case 203:
+                              toast.info(response)
+                              await handleGetOpenCart(userId).then(() => {
+                                   setLoading(false)
+                                   router.push("/checkout")
+                              })
+                              break;
+                         default:
+                              toast.error("خطایی رخ داده است")
+                              break;
+                    }
+
+
+
                })
+
 
           }
 
@@ -96,8 +129,8 @@ const CartProvider = ({ children }) => {
 
           if (user && cartId) {
                setLoading(true)
-               // const payValue = { cartId, callback_url: "https://www.govahito.ir/resultpay" }
-               const payValue = { cartId, callback_url: "http://localhost:3000/resultpay" }
+               const payValue = { cartId, callback_url: "https://www.govahito.ir/resultpay" }
+               // const payValue = { cartId, callback_url: "http://localhost:3000/resultpay" }
                const result = await pay(user.userId, payValue)
                setLoading(false)
                if (result && result.link) {
@@ -113,7 +146,7 @@ const CartProvider = ({ children }) => {
 
 
      return (
-          <CartContext.Provider value={{ openCart, loading, paymentDetail, handleAddProduct, handleRemoveProduct, handlePay }}>
+          <CartContext.Provider value={{ openCart, handleGetOpenCart, loading, paymentDetail, handleAddProduct, handleRemoveProduct, handlePay }}>
                {children}
           </CartContext.Provider>
      )

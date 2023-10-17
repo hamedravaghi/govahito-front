@@ -1,8 +1,8 @@
 import { toast } from "react-toastify"
 
 export const baseUrl = "http://localhost:5003"
-// export const onLineUrl = "https://www.server.govahito.ir"
-const onLineUrl = "http://localhost:5003"
+export const onLineUrl = "https://www.server.govahito.ir"
+// const onLineUrl = "http://localhost:5003"
 const headers = { 'Content-Type': 'application/json' }
 
 export const handleCheckUser = async (value) => {
@@ -217,8 +217,8 @@ export const createOrAddProductToCart = async (userId, body) => {
      try {
 
           const response = await fetch(`${onLineUrl}/cart/create-or-add/${userId}`, { body: JSON.stringify({ product: body }), mode: "cors", method: "POST", headers })
-          const result = await response.json()
-          return result
+          return response
+
      } catch (err) {
           toast.error("خطایی در افزودن محصول به سبد خرید رخ داده است . لطفا لحظاتی دیگر تلاش کنید")
 
@@ -246,10 +246,12 @@ export const pay = async (userId, payValue) => {
      try {
           const response = await fetch(`${onLineUrl}/pay/${userId}`, { body: JSON.stringify(payValue), mode: "cors", method: "POST", headers })
           const result = await response.json()
-          console.log("this is result in pay", result)
-          if (response.status !== 200 || response.status !== 201) {
-               toast.error(result.message)
+          if (response.status === 200) {
+               toast.success("در حال انتقال به درگاه پرداخت")
+          } else {
+               toast.error(result?.message)
           }
+
           return result
      } catch (err) {
           toast.error("اتصال به درگاه بانک با خطا روبرو شد . لطفا دقایقی دیگر تلاش کنید")
@@ -267,7 +269,7 @@ export const checkPay = async (payId) => {
 export const getUserPurchases = async (userId) => {
      try {
 
-          const response = await fetch(`${onLineUrl}/client/purchases/${userId}`, { next: { revalidate:1 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
+          const response = await fetch(`${onLineUrl}/client/purchases/${userId}`, { next: { revalidate: 1 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
           const result = await response.json()
           return result
      } catch (err) {
