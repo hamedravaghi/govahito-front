@@ -10,8 +10,8 @@ module.exports = {
     extend: {
       colors: {
         primary: { main: "#F4AB76", text: "#fcfcfc", hover: "#DB996A" },
-        border: { main: "#ECEEF4", second: "#95A5AA" },
         secondary: { main: "#B5E1E3",second:"#E3F3F3", third:"#516163",background: "#FCFCFC" },
+        border: { main: "#ECEEF4", second: "#95A5AA" },
         text: { main: "#333333", second: "#95A5AA", third: "#516163" },
       },
       boxShadow: {

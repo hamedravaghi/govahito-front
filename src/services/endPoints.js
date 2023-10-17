@@ -1,8 +1,8 @@
 import { toast } from "react-toastify"
 
 export const baseUrl = "http://localhost:5003"
-export const onLineUrl = "https://www.server.govahito.ir"
-// const onLineUrl = "http://localhost:5003"
+// export const onLineUrl = "https://www.server.govahito.ir"
+const onLineUrl = "http://localhost:5003"
 const headers = { 'Content-Type': 'application/json' }
 
 export const handleCheckUser = async (value) => {
@@ -275,4 +275,9 @@ export const getUserPurchases = async (userId) => {
      } catch (err) {
           toast.error("دریافت اطلاعات خرید با خطا روبرو شد")
      }
+}
+
+
+export const getAllUserPayment=async(userId)=>{
+     return  await fetch(`${onLineUrl}/client/payments/${userId}`, { next: { revalidate: 1 }, method: "GET", headers: { 'Content-Type': 'application/json' } })
 }
