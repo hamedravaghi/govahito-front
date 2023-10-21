@@ -74,7 +74,7 @@ const GoldClientExam = ({ certificateSlug, examSlug }) => {
     );
 
   return (
-    <CustomPadding>
+    <>
       {open && (
         <div className="w-full flex flex-col gap-3 mt-5">
         <div className="w-full flex items-center justify-between">
@@ -86,11 +86,11 @@ const GoldClientExam = ({ certificateSlug, examSlug }) => {
             <h4 className=" text-text-second">{exam.subTitle}</h4>
           </div>
         </div>
-        <div className="w-full flex flex-col gap-2 sm:gap-4 ">
+        <div className="w-full flex flex-col gap-6  ">
           {Array.isArray(exam?.questions) > 0 ? (
             exam.questions.map((item, index) => (
               <SimpleQuestionCard
-                border={index + 1 !== exam.questions.length ? true : false}
+              
                 key={item._id}
                 questionText={item.questionText}
                 questionImage={item.questionImage}
@@ -107,7 +107,7 @@ const GoldClientExam = ({ certificateSlug, examSlug }) => {
         </div>
       </div>
       )}
-    </CustomPadding>
+    </>
   );
 };
 
