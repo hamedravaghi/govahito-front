@@ -1,71 +1,46 @@
 "use client";
 import Link from "next/link";
 import LogoContainer from "../LogoContainer";
-import CustomDivider from "../common/CustomDivider";
 import CustomPadding from "../common/CustomPadding";
 import { useWindowSize } from "@/src/hooks/useWindowSize";
 import { useSelectedLayoutSegments } from "next/navigation";
 
 const Footer = () => {
-  const { isMobile } = useWindowSize();
-  const activeSegment = useSelectedLayoutSegments();
-  const examPage = activeSegment[2] === "mains" && activeSegment.length === 4;
+    const { isMobile } = useWindowSize();
+    const activeSegment = useSelectedLayoutSegments();
+    const examPage = activeSegment[2] === "mains" && activeSegment.length === 4;
 
-  if (examPage && isMobile) return null;
-  return (
-    <CustomPadding className="absolute bottom-0  ">
-      <div className="w-full h-[361px] md:h-[258px] " id="footer">
-        <CustomDivider />
-        <div className="flex flex-col md:flex-row  md:justify-between  gap-5 mt-4 md:mt-10">
-          <section className="w-full">
-            <LogoContainer full={true}/>
-          </section>
-          <section className="w-full">
-            <Link href={"/about"} className="font-bold">
-              درباره گواهیتو
-            </Link>
-          </section>
-          <section className="w-full flex flex-col gap-4">
-            <div className="flex gap-2 ">
-              <div className="w-20 h-20 flex items-center ">
-                <a
-                  referrerPolicy="origin"
-                  target="_blank"
-                  href="https://trustseal.enamad.ir/?id=376217&amp;Code=fksV3OKc7FOEYQSnaPzu"
-                >
-                  <img
-                    referrerPolicy="origin"
-                    src="https://Trustseal.eNamad.ir/logo.aspx?id=376217&amp;Code=fksV3OKc7FOEYQSnaPzu"
-                    alt="اینماد"
-                    style={{
-                      cursor: "pointer",
-                    }}
-                    id="fksV3OKc7FOEYQSnaPzu"
-                  />
-                </a>
-              </div>
-            </div>
-            {/* <p className="font-bold">شبکه های اجتماعی</p>
-              <div className="flex gap-2">
-                <button className="w-12 h-12 rounded-xl border border-border-second flex items-center justify-center">
-                  <Instagram />
-                </button>
-                <button className="w-12 h-12 rounded-xl border border-border-second flex items-center justify-center">
-                  <Linkdin />
-                </button>
-              </div> */}
-          </section>
-          <section className="w-full flex flex-col gap-4">
-            <p className="font-bold">با گواهیتو در تماس باشید</p>
-            <p>
-              تهران - خیابان خواجه عبدالله انصاری - کوچه ششم - پلاک 41 - واحد 6
-            </p>
-          </section>
-         
+    if (examPage && isMobile) return null;
+    return (
+        <div className="w-full py-12 mt-20 bg-text-third" id="footer">
+            <CustomPadding className="">
+                <div className="w-full h-full flex flex-col md:flex-row gap-10 items-center md:justify-between">
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-y-10 xl:gap-y-0">
+                        <section className="w-full flex flex-col gap-5">
+                            <LogoContainer full={true} />
+                            <p className="text-xs md:text-sm text-primary-text font-normal">
+                                تمام حقوق مادی و معنوی این وبسایت متعلق به{" "}
+                                <Link href="/" className="hover:text-primary-main transition-colors duration-300 ease-in-out">
+                                    گواهیتو
+                                </Link>{" "}
+                                می باشد
+                            </p>
+                        </section>
+                        <section className="w-full flex flex-col gap-5">
+                            <Link href={"/about"} className="font-bold text-primary-text text-sm md:text-base">
+                                درباره گواهیتو
+                            </Link>
+                            <p className="text-xs md:text-base leading-1 text-primary-text font-normal">تهران ، خیابان خواجه عبدالله انصاری ، کوچه ششم ، پلاک 41 ، واحد 6</p>
+                        </section>
+                    </div>
+                    <section className="flex flex-row md:flex-col xl:flex-row gap-5">
+                        <div className="w-32 h-36 rounded-2xl bg-secondary-background"></div>
+                        <div className="w-32 h-36 rounded-2xl bg-secondary-background"></div>
+                    </section>
+                </div>
+            </CustomPadding>
         </div>
-      </div>
-    </CustomPadding>
-  );
+    );
 };
 
 export default Footer;
