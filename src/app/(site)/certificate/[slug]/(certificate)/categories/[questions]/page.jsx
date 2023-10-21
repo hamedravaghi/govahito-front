@@ -27,7 +27,7 @@ const Questions = async ({ params }) => {
   });
 
   return (
-    <div className="w-full flex flex-col gap-2 sm:gap-4 mt-5">
+    <div className="w-full flex flex-col gap-4 sm:gap-4 mt-5">
       {Array.isArray(content?.questions) > 0 ? (
         content.questions.map((item, index) => (
           <SimpleQuestionCard

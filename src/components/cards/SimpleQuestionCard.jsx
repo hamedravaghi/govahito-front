@@ -9,8 +9,6 @@ const SimpleQuestionCard = ({
   answers,
   trueAnswer,
   hint,
-  id,
-  border,
 }) => {
   return (
     <div className="w-full flex flex-col gap-2  ">
@@ -39,10 +37,6 @@ const SimpleQuestionCard = ({
           hint={hint}
         />
       </div>
-      {/* bottom divider */}
-      {border && (
-        <div className="w-full h-[1px] flex sm:hidden bg-border-second" />
-      )}
     </div>
   );
 };
