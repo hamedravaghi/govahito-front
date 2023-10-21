@@ -6,6 +6,7 @@ import { iranSanse } from "../lib/fonts";
 import CartProvider from "../provider/CartProvider";
 import GoogleAnalytics from '../components/google/GoogleAnalytics';
 import Clarity from '../components/google/Clarity';
+import Goftino from "../components/goftino/Goftino";
 
 
 export const metadata = {
@@ -33,6 +34,7 @@ const RootLayout = ({ children }) => {
                     {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
                 ) : null}
                 <Clarity />
+                <Goftino/>
                 {children}
               </body>
             </ExamProvider>
