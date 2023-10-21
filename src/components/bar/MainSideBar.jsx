@@ -30,10 +30,11 @@ const MainSideBar = () => {
     group
     transition-all duration-200
     overflow-hidden
+   
     ${openSideBar ? "w-full" : "w-0"}
     `}
     >
-      <div className="w-full h-full min-h-screen absolute bottom-0 top-0 right-0 left-0 pb-32 bg-white overflow-y-scroll">
+      <div className="w-full h-full min-h-screen absolute bottom-0 top-0 right-0 left-0 pb-[300px] bg-white overflow-y-scroll">
         <div className="w-full h-[56px] px-4  ">
           <div className="flex justify-between items-center h-full w-full border-b">
             <Link
