@@ -43,7 +43,23 @@ const Footer = () => {
             </section>
           </div>
           <section className="flex flex-row md:flex-col xl:flex-row gap-5">
-            <div className="w-32 h-36 rounded-2xl bg-secondary-background"></div>
+            <div className="w-32 h-36 flex items-center justify-center rounded-2xl bg-secondary-background">
+              <a
+                referrerPolicy="origin"
+                target="_blank"
+                href="https://trustseal.enamad.ir/?id=376217&amp;Code=fksV3OKc7FOEYQSnaPzu"
+              >
+                <img
+                  referrerPolicy="origin"
+                  src="https://Trustseal.eNamad.ir/logo.aspx?id=376217&amp;Code=fksV3OKc7FOEYQSnaPzu"
+                  alt="اینماد"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  id="fksV3OKc7FOEYQSnaPzu"
+                />
+              </a>
+            </div>
             <div className="w-32 h-36 rounded-2xl bg-secondary-background"></div>
           </section>
         </div>
