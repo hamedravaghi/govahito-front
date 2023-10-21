@@ -33,7 +33,7 @@ const RootLayout = ({ children }) => {
                     {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
                 ) : null}
                 <Clarity />
-                {/* {children} */}
+                {children}
               </body>
             </ExamProvider>
           </ClientProvider>
