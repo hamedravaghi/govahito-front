@@ -32,7 +32,7 @@ const GoldExamSection = () => {
                 </div>
             </div>
 
-            <div className="relative w-full grid grid-cols-1 xl:grid-cols-2 gap-y-20 md:place-items-center py-5 bg-secondary-main rounded-r-2xl after:content-[''] after:h-full after:absolute after:bg-secondary-main after:w-full after:right-full after:-z-10">
+            <div className="relative w-full grid grid-cols-1 xl:grid-cols-2 gap-y-20 md:place-items-center py-5 bg-secondary-main rounded-2xl ">
                 <div className="w-full h-80 sm:h-40 flex flex-wrap justify-center relative gap-2">
                     {Question_Modes.map(({ iconPath, text }, index) => (
                         <div key={index} className={`absolute ${boxClassNames[index]} p-4 shadow-base rounded-2xl bg-secondary-background gap-1.5 flex flex-col`}>

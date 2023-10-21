@@ -9,7 +9,7 @@ const MainLayout = ({ children }) => {
             <SiteNavbar />
             <MainSideBar />
             <ToastWrapper />
-            <div className="flex flex-1 flex-col w-full overflow-x-hidden">{children}</div>
+            <div className="flex flex-1 flex-col w-full">{children}</div>
             <Footer />
         </div>
     );
