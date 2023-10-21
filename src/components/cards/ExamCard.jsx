@@ -76,7 +76,7 @@ const ExamCard = ({
 
       {/* mobile view */}
       <div className="w-full h-full flex md:hidden  gap-8">
-        <div className=" w-[156px] md:w-full h-full md:h-auto  flex-col gap-3 justify-between ">
+        <div className=" w-[156px] md:w-full h-full md:h-auto flex flex-col gap-3 justify-between  ">
           <p className="font-bold text-text-third">{subTitle}</p>
           <div className="w-full flex justify-between flex-1 ">
             <div className="h-full flex flex-col items-center justify-between  ">
