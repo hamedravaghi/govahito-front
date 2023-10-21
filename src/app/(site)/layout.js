@@ -3,20 +3,16 @@ import MainSideBar from "@/src/components/bar/MainSideBar";
 import SiteNavbar from "@/src/components/bar/SiteNavbar";
 import ToastWrapper from "@/src/components/wrapper/ToastWrapper";
 
-
 const MainLayout = ({ children }) => {
-  return (
-    <div className="w-full   min-h-screen min-w-screen flex flex-grow flex-col  relative " >
-      <SiteNavbar />
-      <MainSideBar />
-      <ToastWrapper />
-      <div className="flex flex-1 flex-col w-full pb-[400px] md:pb-[300px]">
-        {children}
-      </div>
-      <Footer />
-    </div>
-
-  );
+    return (
+        <div className="w-full min-h-screen min-w-screen flex flex-grow flex-col relative overflow-x-hidden">
+            <SiteNavbar />
+            <MainSideBar />
+            <ToastWrapper />
+            <div className="flex flex-1 flex-col w-full">{children}</div>
+            <Footer />
+        </div>
+    );
 };
 
 export default MainLayout;
