@@ -1,5 +1,5 @@
 "use client"
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import FeatureActionSheet from '../components/actionSheet/FeatureActionSheet'
 
 export const PageContext = createContext({
