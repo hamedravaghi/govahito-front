@@ -30,7 +30,8 @@ const NoPayCard = () => {
       <p className="font-bold">هنوز هیچ آزمونی نخریدی !...</p>
       <div className="w-full flex flex-col items-center gap-4">
         <Link
-          href={"/checkout"}
+          prefetch={true}
+          href={"/product"}
           className="px-3 py-2 rounded-2xl bg-primary-main text-white"
         >
           خرید آزمون طلایی
