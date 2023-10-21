@@ -86,7 +86,7 @@ const GoldClientExam = ({ certificateSlug, examSlug }) => {
             <h4 className=" text-text-second">{exam.subTitle}</h4>
           </div>
         </div>
-        <div className="w-full flex flex-col gap-6  ">
+        <div className="w-full flex flex-col gap-4  ">
           {Array.isArray(exam?.questions) > 0 ? (
             exam.questions.map((item, index) => (
               <SimpleQuestionCard
