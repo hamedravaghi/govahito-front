@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "formik": "^2.4.1",
     "jsonwebtoken": "^9.0.0",
     "leaflet": "^1.9.4",
@@ -21,6 +22,7 @@
     "react": "18.2.0",
     "react-countdown": "^2.3.5",
     "react-dom": "18.2.0",
+    "react-icons": "^4.11.0",
     "react-intersection-observer": "^9.5.2",
     "react-leaflet": "^4.2.1",
     "react-microsoft-clarity": "^1.2.0",

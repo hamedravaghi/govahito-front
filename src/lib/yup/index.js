@@ -1,0 +1,1 @@
+export { academyRegisterSchema } from "./academyregister";
